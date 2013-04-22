@@ -4,6 +4,7 @@ module GlobalCollect::RequestModels::InsertOrderWithPayment
     # WDL §5.28.1 TABLE 105 specifies the full list of possible fields
     def fields
       super.merge({
+        "PAYMENTMETHODID"  => ["N5"   , "O"],
         "PAYMENTPRODUCTID" => ["N5"   , "R"],
         "AMOUNT"           => ["N12"  , "R"],
         "AMOUNTSIGN"       => ["AN1"  , "O"],
