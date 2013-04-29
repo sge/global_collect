@@ -4,7 +4,7 @@ module GlobalCollect::RequestModels::InsertOrderWithPayment
     # WDL §5.28.1 First table specifies the full list of possible fields
     def fields
       super.merge({
-        "ORDERID"                        => ["N10"   , "R"],
+        "ORDERID"                        => ["N10"   , "O"],
         "ORDERTYPE"                      => ["N1"    , "O"],
         "AMOUNT"                         => ["N12"   , "R"],
         "AMOUNTSIGN"                     => ["AN1"   , "O"],
@@ -36,7 +36,7 @@ module GlobalCollect::RequestModels::InsertOrderWithPayment
         "SHIPPINGCITY"                   => ["AN40"  , "O"],
         "SHIPPINGSTATE"                  => ["AN35"  , "O"],
         "SHIPPINGCOUNTRYCODE"            => ["AN2"   , "O"],
-        "MERCHANTREFERENCE"              => ["AN30"  , "R"],
+        "MERCHANTREFERENCE"              => ["AN30"  , "O"],
         "DESCRIPTOR"                     => ["AN50"  , "O"],
         "RESELLERID"                     => ["N10"   , "O"],
         "EMAIL"                          => ["AN70"  , "O"],
