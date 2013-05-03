@@ -20,6 +20,7 @@ module GlobalCollect::Builders::InsertOrderWithPayment
         COUNTRYCODE
         HOSTEDINDICATOR
         RETURNURL
+        ACCEPTNEEDEDINDICATOR
       ]
     end
   end
