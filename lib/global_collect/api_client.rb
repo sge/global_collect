@@ -11,8 +11,15 @@ module GlobalCollect
     # Net::HTTP warns that debug_output should not be set in production
     # because it is a security problem.
     debug_output(nil)
-    
-    
+
+    # Initialize http proxy config, if any.
+    # Note that this relies on the presence of a "secure config" hash, by convention.
+    # This file does not exist locally in the gem, it will be optionally provided by the host app.
+    if SECURE_CONFIG && SECURE_CONFIG['http_proxy']['use_proxy']
+      http_proxy SECURE_CONFIG['http_proxy']['host'], SECURE_CONFIG['http_proxy']['port']
+
+    end
+
     attr_reader :service, :environment, :authentication
     def initialize(service, environment, authentication)
       @service = service
