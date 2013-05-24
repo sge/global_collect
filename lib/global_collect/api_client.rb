@@ -15,7 +15,7 @@ module GlobalCollect
     
     attr_reader :service, :environment, :authentication
     def initialize(service, environment, authentication)
-      @serivce = service
+      @service = service
       @environment = environment
       @authentication = authentication
       @service_url = ApiClient.service_url(service, environment, authentication)
