@@ -15,7 +15,7 @@ module GlobalCollect
     # Initialize http proxy config, if any.
     # Note that this relies on the presence of a "secure config" hash, by convention.
     # This file does not exist locally in the gem, it will be optionally provided by the host app.
-    if SECURE_CONFIG && SECURE_CONFIG['http_proxy']['use_proxy']
+    if defined?(SECURE_CONFIG) && SECURE_CONFIG['http_proxy']['use_proxy']
       http_proxy SECURE_CONFIG['http_proxy']['host'], SECURE_CONFIG['http_proxy']['port']
 
     end
