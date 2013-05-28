@@ -58,20 +58,7 @@ module GlobalCollect
       raise ArgumentError.new("Only [Hosted] Merchant Link is currently supported!") unless [:merchant_link].include?(service)
       raise ArgumentError.new("Only :test and :production are valid environemnts!") unless [:test, :production].include?(environment)
       raise ArgumentError.new("Only :ip_check and :client_auth are valid authentication schemes!") unless [:ip_check, :client_auth].include?(authentication)
-      {
-        :merchant_link => {
-          # WDL §3.4 specifies the test environment urls
-          :test       => {
-            :ip_check     => "https://ps.gcsip.nl/wdl/wdl",
-            :client_auth  => "https://ca.gcsip.nl/wdl/wdl"
-          },
-          # WDL §3.5 specifies the prodution environment urls
-          :production => {
-            :ip_check     => "https://ps.gcsip.com/wdl/wdl",
-            :client_auth  => "https://ca.gcsip.com/wdl/wdl"
-          }
-        }
-      }[service][environment][authentication]
+      SECURE_CONFIG['global_collect'][service][environment][authentication]
     end
   end
 end
