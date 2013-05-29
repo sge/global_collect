@@ -20,7 +20,7 @@ end
 
 def install_canned_response(service, env, auth_scheme, success, action, version)
   response_body = read_support_file filename_for(success, action, version)
-  service_url = GlobalCollect::ApiClient.service_url(service, env, auth_scheme)
+  service_url = GlobalCollect::ApiClient.service_url(service, env, auth_scheme, GlobalCollect::ApiClient::DEFAULT_SERVICE_URL_HASH)
   FakeWeb.register_uri(:post, service_url, :body => response_body)
 end
 

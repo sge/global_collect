@@ -25,12 +25,15 @@ module GlobalCollect
   attr_accessor :authentication_scheme
   attr_accessor :ip_address # only used if authentication_scheme is :ip_check
   attr_accessor :environment
+  attr_accessor :service_url_hash
+  attr_accessor :http_proxy_host
+  attr_accessor :http_proxy_port
   attr_accessor :default_api_version
   attr_accessor :wire_log_file
   attr_accessor :wire_logger
 
   def merchant_link_client
-    GlobalCollect::ApiClient.new(:merchant_link, environment, authentication_scheme)
+    GlobalCollect::ApiClient.new(:merchant_link, environment, authentication_scheme, service_url_hash, http_proxy_host, http_proxy_port)
   end
 
   def wire_logger

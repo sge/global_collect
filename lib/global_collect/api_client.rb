@@ -11,21 +11,29 @@ module GlobalCollect
     # Net::HTTP warns that debug_output should not be set in production
     # because it is a security problem.
     debug_output(nil)
-
-    # Initialize http proxy config, if any.
-    # Note that this relies on the presence of a "secure config" hash, by convention.
-    # This file does not exist locally in the gem, it will be optionally provided by the host app.
-    if defined?(SECURE_CONFIG) && SECURE_CONFIG['http_proxy']['use_proxy']
-      http_proxy SECURE_CONFIG['http_proxy']['host'], SECURE_CONFIG['http_proxy']['port']
-
-    end
+    
+    DEFAULT_SERVICE_URL_HASH = {
+      :merchant_link => {
+        # WDL §3.4 specifies the test environment urls
+        :test       => {
+          :ip_check     => "https://ps.gcsip.nl/wdl/wdl",
+          :client_auth  => "https://ca.gcsip.nl/wdl/wdl"
+        },
+        # WDL §3.5 specifies the prodution environment urls
+        :production => {
+          :ip_check     => "https://ps.gcsip.com/wdl/wdl",
+          :client_auth  => "https://ca.gcsip.com/wdl/wdl"
+        }
+      }
+    }
 
     attr_reader :service, :environment, :authentication
-    def initialize(service, environment, authentication)
+    def initialize(service, environment, authentication, service_url_hash = nil, proxy_host = nil, proxy_port = nil)
       @service = service
       @environment = environment
       @authentication = authentication
-      @service_url = ApiClient.service_url(service, environment, authentication)
+      @service_url = ApiClient.service_url(service, environment, authentication, service_url_hash || DEFAULT_SERVICE_URL_HASH)
+      self.class.http_proxy(proxy_host, proxy_port) unless proxy_host.nil? || proxy_port.nil?
     end
 
     def make_request(request, add_mixins=true)
@@ -53,12 +61,12 @@ module GlobalCollect
       base
     end
 
-    def self.service_url(service, environment, authentication)
+    def self.service_url(service, environment, authentication, service_url_hash)
       # WDL §§3.4-5 specify the allowed arguments
       raise ArgumentError.new("Only [Hosted] Merchant Link is currently supported!") unless [:merchant_link].include?(service)
       raise ArgumentError.new("Only :test and :production are valid environemnts!") unless [:test, :production].include?(environment)
       raise ArgumentError.new("Only :ip_check and :client_auth are valid authentication schemes!") unless [:ip_check, :client_auth].include?(authentication)
-      SECURE_CONFIG['global_collect'][service][environment][authentication]
+      service_url_hash[service][environment][authentication]
     end
   end
 end
