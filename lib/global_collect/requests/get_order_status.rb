@@ -3,7 +3,7 @@ module GlobalCollect::Requests
   class GetOrderStatus < GlobalCollect::Requests::Simple
     # WDL §5.23
     def initialize(order_id, effort_id=nil)
-      super("GET_ORDERSTATUS", (effort_id.is_a? Integer ? { "ORDERID" => order_id, "EFFORTID" => effort_id } : { "ORDERID" => order_id }))
+      super("GET_ORDERSTATUS", (effort_id.is_a?(Integer) ? { "ORDERID" => order_id, "EFFORTID" => effort_id } : { "ORDERID" => order_id }))
     end
     
     def suggested_response_mixins
