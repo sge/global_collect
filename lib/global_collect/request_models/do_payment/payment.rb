@@ -10,10 +10,10 @@ module GlobalCollect::RequestModels::DoPayment
     # WDL §5.13.1 specifies the full list of possible fields
     def fields
       super.merge({
-        "MERCHANTREFERENCE" => ["AN30" , "R"],
+        "MERCHANTREFERENCE" => ["AN30" , "O"],
         "ORDERID"           => ["N10"  , "R"],
         "EFFORTID"          => ["N5"   , "O"],
-        "PAYMENTPRODUCTID"  => ["N5"   , "R"],
+        "PAYMENTPRODUCTID"  => ["N5"   , "O"],
         "AMOUNT"            => ["N12"  , "O"],
         "AMOUNTSIGN"        => ["AN1"  , "O"],
         "CURRENCYCODE"      => ["AN3"  , "R"],
