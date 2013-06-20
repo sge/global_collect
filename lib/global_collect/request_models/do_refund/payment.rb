@@ -13,7 +13,7 @@ module GlobalCollect::RequestModels::DoRefund
       super.merge({
         "ORDERID"               => ["N10",  "R"],
         "EFFORTID"              => ["N5",   "O"],
-        "MERCHANTREFERENCE"     => ["AN30", "R"],
+        "MERCHANTREFERENCE"     => ["AN30", "O"],
         "REFERENCEORIGPAYMENT"  => ["AN30", "O"],
         "CURRENCYCODE"          => ["AN3",  "O"],
         "AMOUNT"                => ["N12",  "O"],
