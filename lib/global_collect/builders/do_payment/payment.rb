@@ -21,6 +21,7 @@ module GlobalCollect::Builders::DoPayment
         CURRENCYCODE
         HOSTEDINDICATOR
         RETURNURL
+        ACCEPTNEEDEDINDICATOR
       ]
     end
   end
