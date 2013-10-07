@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 module GlobalCollect::Requests
   class Base
+    attr_accessor :merchant_id #allows setting merchant_id per request
     attr_accessor :action
     attr_reader :version
     attr_reader :suggested_response_mixins
@@ -30,7 +31,7 @@ module GlobalCollect::Requests
           req_node.tag!("ACTION", @action)
           req_node.tag!("META") do |meta_node|
             meta_node.tag!("IPADDRESS" , GlobalCollect::ip_address ) if GlobalCollect::authentication_scheme == :ip_check
-            meta_node.tag!("MERCHANTID", GlobalCollect::merchant_id)
+            meta_node.tag!("MERCHANTID", self.merchant_id || GlobalCollect::merchant_id)
             meta_node.tag!("VERSION"   , version)
           end
           req_node.tag!("PARAMS") do |params_node|
