@@ -37,7 +37,7 @@ module GlobalCollect::RequestModels::InsertOrderWithPayment
         "SHIPPINGSTATE"                  => ["AN35"  , "O"],
         "SHIPPINGCOUNTRYCODE"            => ["AN2"   , "O"],
         "MERCHANTREFERENCE"              => ["AN30"  , "O"],
-        "DESCRIPTOR"                     => ["AN50"  , "O"],
+        "DESCRIPTOR"                     => ["AN127"  , "O"],
         "RESELLERID"                     => ["N10"   , "O"],
         "EMAIL"                          => ["AN70"  , "O"],
         "EMAILTYPEINDICATOR"             => ["N1"    , "O"],
